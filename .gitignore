@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Pre-trained models
+bart-base-japanese/
+
+# Checkpoints
+models/
