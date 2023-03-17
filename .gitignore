@@ -129,7 +129,9 @@ dmypy.json
 .pyre/
 
 # BART
-bart-base-japanese/
+bart-base-japanese/japanese_bart_base_1.1/
+bart-base-japanese/japanese_bart_base_2.0/
+bart-base-japanese/*.gz
 
 # Data
 result
