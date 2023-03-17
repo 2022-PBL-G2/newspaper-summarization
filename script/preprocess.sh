@@ -1,12 +1,12 @@
 # 前処理
-TRAIN_SRC="./data_s/raw/train.src"
-TRAIN_TGT="./data_s/raw/train.tgt"
-VALID_SRC="./data_s/raw/valid.src"
-VALID_TGT="./data_s/raw/valid.tgt"
-TEST_SRC="./data_s/raw/test.src"
-TEST_TGT="./data_s/raw/test.tgt"
+TRAIN_SRC="./data/raw/train.src"
+TRAIN_TGT="./data/raw/train.tgt"
+VALID_SRC="./data/raw/valid.src"
+VALID_TGT="./data/raw/valid.tgt"
+TEST_SRC="./data/raw/test.src"
+TEST_TGT="./data/raw/test.tgt"
 DICT="./bart-base-japanese/japanese_bart_base_2.0/dict.txt"
-DATASET_DIR="./data_s/interim/"
+DATASET_DIR="./data/interim/"
 SENTENCEPIECE_MODEL="./bart-base-japanese/japanese_bart_base_2.0/sp.model"
 
 cat $TRAIN_SRC | python3 ./fairseq/jaBART_preprocess.py --bpe_model $SENTENCEPIECE_MODEL --bpe_dict $DICT > $DATASET_DIR/train.src-tgt.src

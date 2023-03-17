@@ -1,8 +1,8 @@
 export CUDA_VISIBLE_DEVICES="0,1"
 
-DATASET_DIR="./data_s/interim/"
+DATASET_DIR="./data/interim/"
 FINETUNED_MODEL="./models_s/checkpoint_best.pt"
-RESULT="./data_s/result"
+RESULT="./data/result"
 
 fairseq-generate $DATASET_DIR --path $FINETUNED_MODEL --task translation_from_pretrained_bart --beam 5 --skip-invalid-size-inputs-valid-test \
 --dataset-impl raw --gen-subset test -s src --max-sentences 64 --prepend-bos > $RESULT

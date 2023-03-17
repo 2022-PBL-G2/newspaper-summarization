@@ -1,7 +1,7 @@
 export CUDA_VISIBLE_DEVICES="1"
 
 # 訓練
-DATASET_DIR="./data_s/interim/"
+DATASET_DIR="./data/interim/"
 BART="bart_base"
 PRETRAINED_MODEL="./bart-base-japanese/japanese_bart_base_2.0/bart_model.pt"
 SAVE_MODEL_DIR="./models_s/"
