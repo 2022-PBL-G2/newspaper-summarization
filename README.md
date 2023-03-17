@@ -14,17 +14,14 @@
 
 # Installation
 
-* 以下のページに従い、京大BARTをインストール。得られたモデルをbart-base-japanese/japanese_bart_base_2.0/に配置
+* [以下のページ][https://nlp.ist.i.kyoto-u.ac.jp/?BART%E6%97%A5%E6%9C%AC%E8%AA%9EPretrained%E3%83%A2%E3%83%87%E3%83%AB]に従い、京大BARTをインストール。得られたモデルをbart-base-japanese/japanese_bart_base_2.0/に配置
 * notebooks/make_dataset.ipynbと前処理を行ったファイル（honbun.csv, youyaku.csv, midasi.csv）をcolab上に配置し、見出しと要約の両方で学習検証データに分割。
 * train.src, train.tgt, valid.src, valid.tgtをdata/に配置する。
 
 # Usage
 
-Train
 * script/preprocess.sh⇒script/train.shにより学習を行う。
 * 見出しならベストモデルをcheckpoint_best_h.ptとして、modelsの中に配置。要約も同様にcheckpoint_best_s.ptを配置。
+* flask/app.pyを実行
+
 ※学習時のGPUにはTESLA V100を用いている。
-
-App
-* app.pyを実行
-
