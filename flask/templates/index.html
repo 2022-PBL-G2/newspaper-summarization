@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>要約デモ</title>
+    <link rel="stylesheet" href="./static/css/app.css">
+  </head>
+  <body>
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <div>
+        <div>
+          <h3>1. 生成モードを選択</h3>
+          <input id="mode_s" type="radio" name="mode" value="mode_s" checked>
+          <label for="mode_s">要約生成</label>
+          <input id="mode_h" type="radio" name="mode" value="mode_h">
+          <label for="mode_h">見出し生成</label>
+        </div>
+        <div>
+          <h3>2. 文字数を指定</h3>
+          <input id="len_1" type="radio" name="len" value="50" checked>
+          <label for="len_1">50文字</label>
+          <input id="len_2" type="radio" name="len" value="100">
+          <label for="len_2">100文字</label>
+          <input id="len_3" type="radio" name="len" value="150">
+          <label for="len_3">150文字</label>
+          <input id="len_o" type="radio" name="len" value="oth">
+          <label for="len_o">その他</label>
+          <input type="number" name="lenoth" min="1" placeholder="0">
+        </div>
+        <div>
+          <h3>3. 本文を入力※必須</h3>
+          <textarea name="src" placeholder="本文を入力" required style="width:600px;height:200px"></textarea>
+        </div>
+        <div>
+          <input type="submit" value="要約生成">
+        </div>
+        <div>
+          <h3 id="result">4. 要約候補を表示</h3>
+          <div>
+            <input type="text" name="tgt1" value="{{ tgt1 }}" readonly placeholder="候補文1" style="width:600px;">
+          </div>
+          <div>
+            <input type="text" name="tgt2" value="{{ tgt2 }}" readonly placeholder="候補文2" style="width:600px;">
+          </div>
+          <div>
+            <input type="text" name="tgt3" value="{{ tgt3 }}" readonly placeholder="候補文3" style="width:600px;">
+          </div>
+          <div>
+            <input type="text" name="tgt4" value="{{ tgt4 }}" readonly placeholder="候補文4" style="width:600px;">
+          </div>
+          <div>
+            <input type="text" name="tgt5" value="{{ tgt5 }}" readonly placeholder="候補文5" style="width:600px;">
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+          $(function() {
+            var mode = "要約"
+
+            // 生成モードの選択
+            $("[name=mode]:radio").change( function() {
+              if ($("[id=mode_s]").prop("checked")) {
+                for (var i=1; i<=3; i++) {
+                  var len = 50;
+                  mode = "要約"
+                  $(`[id=len_${i}]`).val(`${len*i}`);
+                  $(`[for=len_${i}]`).text(`${len*i}文字`);
+                }
+                $("[type=submit]").val(`${mode}生成`);
+                $(`[id=result]`).text(`4. ${mode}候補の表示`);
+              } else if ($("[id=mode_h]").prop("checked")) {
+                for (var i=1; i<=3; i++) {
+                  var len = 5;
+                  mode = "見出し"
+                  $(`[id=len_${i}]`).val(`${len+i*10}`);
+                  $(`[for=len_${i}]`).text(`${len+i*10}文字`);
+                }
+                $("[type=submit]").val(`${mode}生成`);
+                $(`[id=result]`).text(`4. ${mode}候補の表示`);
+              }
+            });
+
+            // 長さを選択：その他が選択された場合
+            $("[name=lenoth]").hide();
+            $("[name=len]:radio").change( function() {
+              if ($("[id=len_o]").prop("checked")) {
+                $("[name=lenoth]").show();
+                $("[name=lenoth]").attr('required', true);
+              } else {
+                $("[name=lenoth]").hide();
+                $("[name=lenoth]").attr('required', false);
+              }
+            });
+
+            // サブミットボタン⇒ロード画面の表示
+            $("[type=submit]:input").on('click', function(){
+              var src = $("[name=src]").val()
+              var oth = $("[name=lenoth]").val()
+              if (src != "" && $("[name=lenoth]").is(":hidden")) {
+                setTimeout(function(){
+                  $('body').append(`<div class="loading"><img src="/static/images/loading.gif" /><p>${mode}を生成中です...</p></div>`)
+                },100);
+              }
+              if (src != "" && $("[name=lenoth]").is(":visible") && oth != "") {
+                setTimeout(function(){
+                  $('body').append(`<div class="loading"><img src="/static/images/loading.gif" /><p>${mode}を生成中です...</p></div>`)
+                },100);
+              }
+            });
+          });
+      </script>
+  </body>
+</html>
